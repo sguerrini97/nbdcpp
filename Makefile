@@ -6,7 +6,7 @@ CPPFLAGS += -march=native -Ofast
 # debug options
 # CPPFLAGS += -ggdb -Og -DNBDCPP_DEBUG -Werror -fmax-errors=1
 
-EXPROGS = ramdisk loopback
+EXPROGS = ramdisk loopback bswap16
 
 all: $(EXPROGS)
 
