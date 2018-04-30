@@ -7,7 +7,7 @@
 // modeled on DevExample from nbdserv.h
 // uses a file (or device file) for backend storage
 template <unsigned BS=512>
-class Loopback {
+class BSwap16 {
   private:
     mutable std::fstream _file;
     int _nblocks;
@@ -17,7 +17,7 @@ class Loopback {
     }
 
   public:
-    Loopback(const std::string& fname, size_t nblocks=0)
+    BSwap16(const std::string& fname, size_t nblocks=0)
       :_file(fname.c_str(), openflags())
     {
       decltype(_file.tellg()-_file.tellg()) actsize;
@@ -62,8 +62,8 @@ class Loopback {
     }
 
     // don't allow copying
-    Loopback(const Loopback&) = delete;
-    Loopback& operator=(const Loopback&) = delete;
+    BSwap16(const BSwap16&) = delete;
+    BSwap16& operator=(const BSwap16&) = delete;
 
     // should return false if some unrecoverable error has occurred
     bool good() const { return _file.good(); }
@@ -167,7 +167,7 @@ using namespace nbdcpp;
 int main(int argc, char** argv) {
   auto usage = [argv]() {
     errout() << "usage: " << argv[0] << " file [-s size]" << nbd_usage_line() << "\n";
-    errout() << "  Provides a loopback device connected to the given file.\n";
+    errout() << "  Provides a device with bytes swapped every 16 bits word from the given file.\n";
     errout() << "  size is in KB; if not given, the current filesize is used.\n";
     nbd_usage_doc(errout());
   };
@@ -196,9 +196,9 @@ int main(int argc, char** argv) {
     }
     ++argind;
     // convert from KB to number of blocks
-    size = 1 + (size*1024 - 1) / Loopback<>::blocksize();
+    size = 1 + (size*1024 - 1) / BSwap16<>::blocksize();
   }
 
   // everything else is taken care of by nbdcpp
-  return nbdcpp_main<Loopback<>>(argc, argv, argind, usage, fname, size);
+  return nbdcpp_main<BSwap16<>>(argc, argv, argind, usage, fname, size);
 }
