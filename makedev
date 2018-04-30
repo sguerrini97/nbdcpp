@@ -246,7 +246,7 @@ if $daemonize; then
   else
     echo "The device is ready at $devfile"
     echo "Log message are stored in $logfile"
-    echo "Run the script $Killfile to close."
+    echo "Run the script $killfile to close."
   fi
   exit 0
 else
