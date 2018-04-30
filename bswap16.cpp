@@ -84,7 +84,7 @@ class BSwap16 {
       _file.seekg(index * blocksize());
       _file.read(d, blocksize());
       
-      for (int i = 0; i < blocksize(); i+=2)
+      for (size_t i = 0; i < blocksize(); i+=2)
       {
       	char b = d[i];
       	d[i] = d[i+1];
@@ -100,7 +100,7 @@ class BSwap16 {
       char *d = new char[blocksize()];
       memcpy (d, reinterpret_cast<const char*>(data), blocksize());
       
-      for (int i = 0; i < blocksize(); i+=2)
+      for (size_t i = 0; i < blocksize(); i+=2)
       {
       	char b = d[i];
       	d[i] = d[i+1];
@@ -121,7 +121,7 @@ class BSwap16 {
       _file.seekg(index * blocksize());
       _file.read(d, count * blocksize());
       
-      for (int i = 0; i < count * blocksize(); i+=2)
+      for (size_t i = 0; i < count * blocksize(); i+=2)
       {
       	char b = d[i];
       	d[i] = d[i+1];
@@ -135,7 +135,7 @@ class BSwap16 {
       char *d = new char[count*blocksize()];
       memcpy (d, reinterpret_cast<const char*>(data), count*blocksize());
       
-      for (int i = 0; i < count * blocksize(); i+=2)
+      for (size_t i = 0; i < count * blocksize(); i+=2)
       {
       	char b = d[i];
       	d[i] = d[i+1];
