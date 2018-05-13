@@ -71,7 +71,6 @@ static inline std::ostream& errout() { return *errout_ptr(); }
 static inline std::ostream& logout() { return *logout_ptr(); }
 static inline std::ostream& infoout() { return *infoout_ptr(); }
 
-typedef uint64_t size_t;
 typedef unsigned char byte;
 
 // default method to read in multiple bytes at once
